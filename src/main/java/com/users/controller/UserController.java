@@ -79,7 +79,7 @@ public class UserController {
 
         User registered = new User();
         if (!result.hasErrors()) {
-            registered = createUserAccount(accountDto, result);
+            registered = createUserAccount(accountDto);
         }
         if (registered == null) {
             result.rejectValue("email", "message.regError");
@@ -92,7 +92,7 @@ public class UserController {
         }
     }
 
-    private User createUserAccount(UserDto accountDto, BindingResult result) {
+    private User createUserAccount(UserDto accountDto) {
         User registered;
         try {
             registered = userService.registerNewUserAccount(accountDto);

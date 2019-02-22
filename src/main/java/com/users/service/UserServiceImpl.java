@@ -2,6 +2,10 @@ package com.users.service;
 
 import com.users.dto.UserDto;
 import com.users.exceptions.EmailExistsException;
+import com.users.model.Privilege;
+import com.users.model.PrivilegeName;
+import com.users.model.Role;
+import com.users.model.RoleName;
 import com.users.model.User;
 import com.users.repository.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -63,7 +68,18 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
         user.setEmail(accountDto.getEmail());
         user.setUsername(accountDto.getEmail());
-        // user.setRoles(Arrays.asList("ROLE_USER"));
+
+        Privilege privilege = new Privilege();
+        privilege.setName(PrivilegeName.READ);
+
+        Role role = new Role();
+        role.setName(RoleName.ROLE_USER);
+
+        privilege.setRoles(Arrays.asList(role));
+        role.setPrivileges(Arrays.asList(privilege));
+
+        user.setRoles(Arrays.asList(role));
+
         return userDAO.save(user);
     }
 

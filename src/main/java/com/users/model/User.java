@@ -2,7 +2,11 @@ package com.users.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.Collection;
 
 /**
  * @author atsikhamirau on 23.10.2018
@@ -26,7 +30,14 @@ public class User extends BaseEntity {
     @Column(name = "email")
     private String email;
 
-    // private List<String> roles;
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
 
     public String getUsername() {
         return username;
@@ -68,4 +79,11 @@ public class User extends BaseEntity {
         this.email = email;
     }
 
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
 }

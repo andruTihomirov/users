@@ -6,4 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * @author atsikhamirau on 23.10.2018
  */
-public interface UserDAO extends JpaRepository<User, Long> {}
+public interface UserDAO extends JpaRepository<User, Long> {
+
+    User findByUsername(String username);
+
+    User findByEmail(String email);
+
+}

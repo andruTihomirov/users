@@ -1,5 +1,7 @@
 package com.users.service;
 
+import com.users.dto.UserDto;
+import com.users.exceptions.EmailExistsException;
 import com.users.model.User;
 
 import java.util.List;
@@ -18,4 +20,6 @@ public interface UserService {
     User update(User user);
 
     void deleteById(Long id);
+
+    User registerNewUserAccount(UserDto accountDto) throws EmailExistsException;
 }

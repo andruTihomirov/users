@@ -1,6 +1,7 @@
 package com.users.repository;
 
 import com.users.model.Role;
+import com.users.model.RoleName;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -8,6 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface RoleDAO extends JpaRepository<Role, Long> {
 
-    Role findByName(String name);
+    Role findByName(RoleName name);
 
 }

@@ -1,6 +1,7 @@
 package com.users.repository;
 
 import com.users.model.Privilege;
+import com.users.model.PrivilegeName;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -8,6 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface PrivilegeDAO extends JpaRepository<Privilege, Long> {
 
-    Privilege findByName(String name);
+    Privilege findByName(PrivilegeName name);
 
 }

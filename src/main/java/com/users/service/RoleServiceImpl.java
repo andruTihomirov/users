@@ -19,11 +19,15 @@ public class RoleServiceImpl implements RoleService {
     private RoleDAO roleDao;
 
     @Override
+    public Role findByName(RoleName name) {
+        return roleDao.findByName(name);
+    }
+
+    @Override
     public Role createRoleIfNotFound(String name, Collection<Privilege> privileges) {
-        Role role = roleDao.findByName(name);
+        Role role = roleDao.findByName(RoleName.valueOf(name));
         if (role == null) {
-            role = new Role();
-            role.setName(RoleName.valueOf(name));
+            role = new Role(name);
             role.setPrivileges(privileges);
             roleDao.save(role);
         }

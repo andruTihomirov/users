@@ -2,6 +2,7 @@ package com.users.service;
 
 import com.users.model.Privilege;
 import com.users.model.Role;
+import com.users.model.RoleName;
 
 import java.util.Collection;
 
@@ -11,4 +12,6 @@ import java.util.Collection;
 public interface RoleService {
 
     Role createRoleIfNotFound(String name, Collection<Privilege> privileges);
+
+    Role findByName(RoleName name);
 }

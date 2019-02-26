@@ -17,10 +17,9 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 
     @Override
     public Privilege createPrivilegeIfNotFound(String name) {
-        Privilege privilege = privilegeDao.findByName(name);
+        Privilege privilege = privilegeDao.findByName(PrivilegeName.valueOf(name));
         if (privilege == null) {
-            privilege = new Privilege();
-            privilege.setName(PrivilegeName.valueOf(name));
+            privilege = new Privilege(name);
             privilegeDao.save(privilege);
         }
         return privilege;

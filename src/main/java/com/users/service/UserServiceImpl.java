@@ -2,8 +2,6 @@ package com.users.service;
 
 import com.users.dto.UserDto;
 import com.users.exceptions.EmailExistsException;
-import com.users.model.Privilege;
-import com.users.model.PrivilegeName;
 import com.users.model.Role;
 import com.users.model.RoleName;
 import com.users.model.User;
@@ -27,6 +25,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RoleService roleService;
 
     @Override
     public List<User> findAll() {
@@ -69,15 +70,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(accountDto.getEmail());
         user.setUsername(accountDto.getEmail());
 
-        Privilege privilege = new Privilege();
-        privilege.setName(PrivilegeName.READ);
-
-        Role role = new Role();
-        role.setName(RoleName.ROLE_USER);
-
-        privilege.setRoles(Arrays.asList(role));
-        role.setPrivileges(Arrays.asList(privilege));
-
+        Role role = roleService.findByName(RoleName.ROLE_USER);
         user.setRoles(Arrays.asList(role));
 
         return userDAO.save(user);

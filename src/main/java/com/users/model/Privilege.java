@@ -1,6 +1,8 @@
 package com.users.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,10 +16,17 @@ public class Privilege {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     private PrivilegeName name;
 
     @ManyToMany(mappedBy = "privileges")
     private Collection<Role> roles;
+
+    public Privilege() {}
+
+    public Privilege(String name) {
+        this.name = PrivilegeName.valueOf(name);
+    }
 
     public Long getId() {
         return id;

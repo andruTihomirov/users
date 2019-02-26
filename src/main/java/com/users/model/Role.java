@@ -36,6 +36,12 @@ public class Role {
                     name = "privilege_id", referencedColumnName = "id"))
     private Collection<Privilege> privileges;
 
+    public Role() {}
+
+    public Role(String name) {
+        this.name = RoleName.valueOf(name);
+    }
+
     public Long getId() {
         return id;
     }
